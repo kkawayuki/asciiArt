@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ascii art generator</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="circle2.png">
 
     <!--link js file, add defer to prevent onload error-->
     <script src="img.js" defer></script>
@@ -22,7 +23,7 @@
             <!--width specifier-->
             <label for="widthInput">Output width (chars):</label>
             <input type="range" id="widthInput" min="20" max="300" value="100" onchange="updateTextInput(this.value);"/>
-            <input type="text" id="textInput" value="">
+            <input type="text" id="textInput" value="100" >
         </div>
 
         <!--canvas area to display selected image-->
