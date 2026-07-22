@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 
     <!--link js file, add defer to prevent onload error-->
     <script src="img.js" defer></script>
@@ -11,15 +12,25 @@
 <body>
     <h1>img ➜ ascii art generator</h1>
 
-    <!--image input-->
-    <label for="imageInput">Choose an image to upload:</label>
-    <input type="file" id="imageInput" accept="image/*" />
+    <div id="displayTable">
+    
+        <div id="controls">
+            <!--image input-->
+            <label for="imageInput">Choose an image to upload:</label>
+            <input type="file" id="imageInput" accept="image/*" />
 
-    <!--width specifier-->
-    <label for="widthInput">Output width (chars):</label>
-    <input type="number" id="widthInput" min="20" max="300" value="100" />
+            <!--width specifier-->
+            <label for="widthInput">Output width (chars):</label>
+            <input type="range" id="widthInput" min="20" max="300" value="100" onchange="updateTextInput(this.value);"/>
+            <input type="text" id="textInput" value="">
+        </div>
 
-    <!--canvas area to display output-->
-    <canvas id = "canvas" style="border: 1px solid black;"></canvas>
+        <!--canvas area to display selected image-->
+        <canvas id = "canvas"></canvas>
+    </div>
+
+    <!--ASCII display -->
+    <pre id="asciiOutput"></pre>
+    
 </body>
 </html>
