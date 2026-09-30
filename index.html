@@ -6,8 +6,6 @@
     <title>ascii art generator</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="circle2.png">
-
-    <!--link js file, add defer to prevent onload error-->
     <script src="img.js" defer></script>
 </head>
 <body>
@@ -18,20 +16,35 @@
         <div id="controls">
             <!--image input-->
             <label for="imageInput">Choose an image to upload:</label>
-            <input type="file" id="imageInput" accept="image/*" />
+            <input type="file" class="control" id="imageInput" accept="image/*" /> 
+
+            <label>samples</label>
+            <div class="control" id="samples">
+                <img src = "images/madoka.jpg" alt="madoka">
+                <img src = "images/sana.png" alt="sana">
+                <img src = "images/smile.png" alt="pinterest">
+            </div>
 
             <!--width specifier-->
-            <label for="widthInput">Output width (chars):</label>
-            <input type="range" id="widthInput" min="20" max="300" value="100" onchange="updateTextInput(this.value);"/>
-            <input type="text" id="textInput" value="100" >
+            <div class="control">
+                <label for="widthInput">Output width (chars):</label>
+                <input type="range" id="widthInput" min="20" max="300" value="100"/>
+                <input type="text" id="textInput" value="100" >
+            </div>
         </div>
 
         <!--canvas area to display selected image-->
         <canvas id = "canvas"></canvas>
+
     </div>
 
-    <!--ASCII display -->
-    <pre id="asciiOutput"></pre>
+    <div id="asciiContainer">
+        <!--ASCII display -->
+        <pre id="asciiOutput"></pre>
+    </div>
+    
+
+    
     
 </body>
 </html>

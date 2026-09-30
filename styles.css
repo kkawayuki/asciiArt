@@ -1,9 +1,14 @@
 #displayTable
 {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+
     outline: 2px solid black;
     border-radius: 5px;
     padding: 10px 10px 10px 10px;
+    width: 80%;
 }
 
 body {
@@ -20,6 +25,11 @@ body {
     padding-right: 20px;
 }
 
+.control
+{
+    padding-bottom: 15px;
+}
+
 label {
     display: flex;
     align-items: center;
@@ -30,15 +40,39 @@ canvas{
     outline: 2px solid black;
     border-radius: 5px;
     
-    max-width: 10vw;
+    width: 15vw;
+        /* fixed box, the same for every image */
+        height: 15vw;
+    object-fit: contain;
     overflow-y: auto;
+}
+
+#samples {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+#samples img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 #asciiOutput {
     font-family: "Courier New", monospace;
-    font-size: 13px;
-    line-height: 7.5px;
-    max-width: 90vw;
+    font-size: 10px;
+    line-height: 0.6;
     max-height: auto;
     overflow-x: auto;     /* wide content scrolls within boundaries max width */
+
+    justify-self: center;
+}
+
+#asciiContainer
+{
+    justify-content: center;
+    align-items: center;
 }
