@@ -9,42 +9,61 @@
     <script src="img.js" defer></script>
 </head>
 <body>
-    <h1>img ➜ ascii art generator</h1>
+    <main class="layout">
 
-    <div id="displayTable">
-    
-        <div id="controls">
-            <!--image input-->
-            <label for="imageInput">Choose an image to upload:</label>
-            <input type="file" class="control" id="imageInput" accept="image/*" /> 
-
-            <label>samples</label>
-            <div class="control" id="samples">
-                <img src = "images/madoka.jpg" alt="madoka">
-                <img src = "images/sana.png" alt="sana">
-                <img src = "images/smile.png" alt="pinterest">
+        <section class="hero">
+            <div class="hero-container">
+                <h1>img ➜ ascii art generator</h1>
+                <p>upload an image or pick a sample, then drag the slider to set the output width</p>
             </div>
+        </section>
 
-            <!--width specifier-->
-            <div class="control">
-                <label for="widthInput">Output width (chars):</label>
-                <input type="range" id="widthInput" min="20" max="300" value="100"/>
-                <input type="text" id="textInput" value="100" >
-            </div>
+        <div class="workspace">
+            <section id="input">
+                <h2>input</h2>
+
+                <div id="displayTable">
+                    <div id="controls">
+                        <!--image input-->
+                        <div class="control">
+                            <label for="imageInput">choose an image to upload</label>
+                            <input type="file" id="imageInput" accept="image/*" />
+                        </div>
+
+                        <div class="control">
+                            <label>samples</label>
+                            <div id="samples">
+                                <img src="images/madoka.jpg" alt="madoka">
+                                <img src="images/sana.png" alt="sana">
+                                <img src="images/smile.png" alt="pinterest">
+                            </div>
+                        </div>
+
+                        <!--width specifier-->
+                        <div class="control">
+                            <label for="widthInput">output width (chars)</label>
+                            <div class="width-row">
+                                <input type="range" id="widthInput" min="20" max="300" value="100"/>
+                                <input type="text" id="textInput" value="100" aria-label="output width">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--canvas area to display selected image, below the controls-->
+                    <canvas id="canvas"></canvas>
+                </div>
+            </section>
+
+            <section id="output">
+                <h2>output</h2>
+
+                <div id="asciiContainer">
+                    <!--ASCII display -->
+                    <pre id="asciiOutput"></pre>
+                </div>
+            </section>
         </div>
 
-        <!--canvas area to display selected image-->
-        <canvas id = "canvas"></canvas>
-
-    </div>
-
-    <div id="asciiContainer">
-        <!--ASCII display -->
-        <pre id="asciiOutput"></pre>
-    </div>
-    
-
-    
-    
+    </main>
 </body>
 </html>

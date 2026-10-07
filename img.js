@@ -1,5 +1,6 @@
 const fileInput = document.getElementById("imageInput");
 const widthInput = document.getElementById("widthInput");
+const textInput = document.getElementById("textInput");
 
 let currentImage = null; 
 
@@ -34,6 +35,24 @@ fileInput.addEventListener("change", (event) => {
 
 widthInput.addEventListener("input", (event) => {
     updateTextInput(event.target.value);
+    if(!currentImage) return;
+    generateAscii(currentImage);
+});
+
+//typing a width moves the slider and regenerates once the number is in range
+textInput.addEventListener("input", (event) => {
+    const val = Number(event.target.value);
+    if (!Number.isInteger(val) || val < widthInput.min || val > widthInput.max) return;
+    widthInput.value = val;
+    if(!currentImage) return;
+    generateAscii(currentImage);
+});
+
+//on enter/blur, snap whatever was typed back to the slider's (clamped) value
+textInput.addEventListener("change", (event) => {
+    const val = Number(event.target.value);
+    if (event.target.value.trim() !== "" && !Number.isNaN(val)) widthInput.value = val; //range clamps it for us
+    updateTextInput(widthInput.value);
     if(!currentImage) return;
     generateAscii(currentImage);
 });

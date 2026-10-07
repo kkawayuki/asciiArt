@@ -1,78 +1,236 @@
-#displayTable
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
+:root {
+    /* theme colors (shared with a1portfolio) */
+    --text: #fbf9f0;   /* all text */
+    --light: #babab7;  /* page background */
+    --mid: #565050;    /* panels, footer */
+    --dark: #181714;   /* header bands, chips, canvas */
+    --accent: var(--dark); /* buttons, slider */
+    --page-margin: 10%; /* side margins around the content */
+    --indent: 1rem; /* inner padding for text inside boxes/bands */
 
-    outline: 2px solid black;
-    border-radius: 5px;
-    padding: 10px 10px 10px 10px;
-    width: 80%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: var(--light);
+}
+
+html {
+    font-size: 120%;
+    scroll-behavior: smooth;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
+    margin: 0;
+    background: var(--light);
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+.hero-container p{
+    font-size: 0.8rem;
+}
+
+h1,
+h2 {
+    font-weight: normal;
+    margin: 0 0 0.75rem;
+    background-color: var(--dark);
+    padding: 0.375rem 0;
+}
+
+/* section headers line up with the text in the panels and sit flush on top of them */
+h2 {
+    margin-bottom: 0;
+    padding-inline: var(--indent);
+}
+
+a {
+    color: inherit;
+}
+
+.layout {
+    padding: 1rem var(--page-margin);
+}
+
+section {
+    padding: 0.75rem 0;
+    margin-bottom: 0.5rem;
+}
+
+/* input and output side by side: fixed-width controls column, output takes the rest */
+.workspace {
+    display: grid;
+    grid-template-columns: 16rem minmax(0, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* panels stretch so both columns end at the same height */
+.workspace section {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    font-family: system-ui, sans-serif;
-    padding: 24px;
+    margin-bottom: 0;
 }
 
-#controls
-{
-    padding-right: 20px;
+#displayTable,
+#asciiContainer {
+    flex: 1;
 }
 
-.control
-{
-    padding-bottom: 15px;
+/* hero */
+.hero-container {
+    background-color: var(--dark);
+    padding: 0.625rem;
+    border-radius: 0.3rem;
+}
+
+.hero p {
+    margin: 0.5rem 0 1rem;
+}
+
+/* input panel: controls on top, preview below */
+#displayTable {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: var(--indent);
+    background: var(--mid);
+}
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    min-width: 0;
 }
 
 label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.85rem;
 }
 
-canvas{
-    outline: 2px solid black;
-    border-radius: 5px;
-    
-    width: 15vw;
-        /* fixed box, the same for every image */
-        height: 15vw;
-    object-fit: contain;
-    overflow-y: auto;
+/* file picker: hide the native look, style the button like the portfolio's live link */
+#imageInput {
+    font: inherit;
+    font-size: 0.8rem;
+    color: var(--text);
+    max-width: 100%;
 }
 
-#samples {
-    display: flex;
-    gap: 8px;
-    margin-top: 6px;
-}
-
-#samples img {
-    width: 48px;
-    height: 48px;
-    object-fit: cover;
-    border-radius: 4px;
+#imageInput::file-selector-button {
+    margin-right: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border: none;
+    background: var(--accent);
+    color: var(--text);
+    font: inherit;
     cursor: pointer;
 }
 
+#imageInput::file-selector-button:hover {
+    filter: brightness(0.9);
+}
+
+/* sample thumbnails, styled like the portfolio's project nodes */
+#samples {
+    display: flex;
+    gap: 1rem;
+}
+
+#samples img {
+    width: 4rem;
+    height: 3rem;
+    object-fit: cover;
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+#samples img:hover {
+    border-color: var(--text);
+}
+
+.width-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+#widthInput {
+    flex: 1;
+    accent-color: var(--accent);
+}
+
+/* number readout as a dark chip */
+#textInput {
+    width: 3.5rem;
+    padding: 0.25rem 0.6rem;
+    border: none;
+    background: var(--dark);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* fixed preview box, the same for every image */
+canvas {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    background: var(--dark);
+}
+
+/* output: light paper so dark characters read as dark (the char map is dark -> light) */
+#asciiContainer {
+    display: flex;
+    justify-content: safe center; /* "safe" keeps the left edge reachable when the art is wider than the panel */
+    align-items: safe center;
+    padding: var(--indent);
+    background: var(--text);
+    overflow-x: auto; /* wide content scrolls within the panel */
+}
+
 #asciiOutput {
+    margin: 0;
     font-family: "Courier New", monospace;
     font-size: 10px;
     line-height: 0.6;
-    max-height: auto;
-    overflow-x: auto;     /* wide content scrolls within boundaries max width */
-
-    justify-self: center;
+    color: var(--dark);
 }
 
-#asciiContainer
-{
-    justify-content: center;
+/* footer */
+.footer {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    margin: 0 var(--page-margin) 1rem;
+    padding: 1rem 2rem;
+    background: var(--mid);
+}
+
+.footer p {
+    margin: 0;
+}
+
+/* phones: output drops below input */
+@media (max-width: 600px) {
+    .layout {
+        padding: 1rem;
+    }
+
+    .workspace {
+        grid-template-columns: minmax(0, 1fr); /* minmax stops the wide art from stretching the column */
+    }
+
+    .footer {
+        margin: 0 1rem 1rem;
+    }
 }
